@@ -12,28 +12,56 @@
  */
 class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
   protected $mods;
+  private $unb_institution_name;
+  private $unb_faculty_name;
+  private $unb_department_name;
+  private $unb_group_name;
+  private $unb_scholarship_level;
+  private $unb_object_type;
+  private $document;
+
+  /**
+   * Constructor.
+   */
+  protected function __construct($source) {
+    parent::__construct($source);
+    $this->document = $this->source['document'];
+    $this->unb_institution_name = $this->source['unb_institution_name'];
+    $this->unb_faculty_name = $this->source['unb_faculty_name'];
+    $this->unb_department_name = $this->source['unb_department_name'];
+    $this->unb_group_name = $this->source['unb_group_name'];
+    $this->unb_scholarship_level = $this->source['unb_scholarship_level'];
+    $this->unb_object_type = $this->source['unb_object_type'];
+  }
 
   /**
    * Get an item from the source.
    *
    * @see IslandoraImportObject::getOne()
    */
-  public static function getOne(&$file) {
-    $record = '';
-
+  public static function getOne(&$info) {
     $refworks = new DOMDocument();
-    $refworks->load($file->uri);
+    $refworks->load($info['file']->uri);
     $xpath = new DOMXPath($refworks);
     $results = $xpath->query('/refworks/reference');
-    $documents = array();
+    $record = array();
     if ($results->length >= 1) {
       // Get Record.
       $child = $results->item(0);
-      $record = '<refworks>' . $refworks->saveXML($child) . '</refworks>';
+      $record['document'] = '<refworks>' . $refworks->saveXML($child) . '</refworks>';
+      array_push(
+        $record,
+        $info['unb_institution_name'],
+        $info['unb_faculty_name'],
+        $info['unb_faculty_name'],
+        $info['unb_group_name'],
+        $info['unb_scholarship_level'],
+        $info['unb_object_type']
+      );
       // Remove Record.
       $child->parentNode->removeChild($child);
-      $refworks->save($file->uri);
-      file_save($file);
+      $refworks->save($info['file']->uri);
+      file_save($info['file']);
     }
     return (empty($record) ? FALSE : new self($record));
   }
@@ -45,9 +73,9 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
    */
   public function getMODS() {
     if ($this->mods === NULL) {
-      $path = drupal_get_path('module', 'islandora_refworksxml_importer');
+      $path = drupal_get_path('module', 'islandora_unb_refworksxml_importer');
       $refworks = new DOMDocument();
-      $refworks->loadXML($this->source);
+      $refworks->loadXML($this->document);
       $genre = $refworks->getElementsByTagName('rt');
       $genre_string = $genre->item(0)->nodeValue;
       if (empty($genre)) {
