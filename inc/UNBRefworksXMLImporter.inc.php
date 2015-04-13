@@ -30,6 +30,8 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
    * @see IslandoraBatchImporter::getForm()
    */
   public static function getForm(array &$form_state) {
+    module_load_include('php', 'islandora_unb_refworks_importer', 'inc/unb_facet_form_elements.inc');
+
     return array(
       'fs' => array(
         '#type' => 'fieldset',
@@ -41,6 +43,12 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
             'file_validate_extensions' => array('xml'),
           ),
         ),
+        'unb_institution_name' => _get_unb_institution_name_form_element(),
+        'unb_faculty_name' => _get_unb_faculty_name_form_element(),
+        'unb_department_name' => _get_unb_department_name_form_element(),
+        'unb_group_name' => _get_unb_group_name_form_element(),
+        'unb_scholarship_level' => _get_unb_scholarship_level_form_element(),
+        'unb_object_type' => _get_unb_object_type_form_element(),
         'submit' => array(
           '#type' => 'submit',
           '#value' => t('Import'),
