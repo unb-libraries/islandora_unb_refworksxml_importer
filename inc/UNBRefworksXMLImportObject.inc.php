@@ -54,7 +54,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
         return FALSE;
       }
       switch ($genre_string) {
-        case 'Book':
+        case 'Book, Whole':
           $xsl_path = $path . '/xsl/refworks_to_mods_book.xsl';
           $genre->item(0)->nodeValue = 'book';
           break;
@@ -67,17 +67,22 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
 
         case 'Conference Proceedings':
           $xsl_path = $path . '/xsl/refworks_to_mods_conf.xsl';
-          $genre->item(0)->nodeValue = 'paper-conference';
+          $genre->item(0)->nodeValue = 'Conference Proceeding';
           break;
 
-        case 'Newspaper Article':
+        case 'Journal Article':
           $xsl_path = $path . '/xsl/refworks_to_mods_journal.xsl';
-          $genre->item(0)->nodeValue = 'article-newspaper';
+          $genre->item(0)->nodeValue = 'Journal Article';
+          break;
+
+        case 'Web Page':
+          $xsl_path = $path . '/xsl/refworks_to_mods_journal.xsl';
+          $genre->item(0)->nodeValue = 'Web Page';
           break;
 
         default:
           $xsl_path = $path . '/xsl/refworks_to_mods_journal.xsl';
-          $genre->item(0)->nodeValue = 'article-journal';
+          $genre->item(0)->nodeValue = 'Journal Article';
       }
       $xslt = new XSLTProcessor();
       $xsl_doc = new DomDocument();
