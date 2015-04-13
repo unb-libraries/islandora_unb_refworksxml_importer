@@ -116,7 +116,9 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $xsl_doc = new DomDocument();
       $xsl_doc->load($xsl_path);
       $xslt->importStylesheet($xsl_doc);
-      $this->mods = $xslt->transformToXml($refworks);
+      $transformed_doc = $xslt->transformToDoc($refworks);
+      // Inject UNB MODS elements here!
+      $this->mods = $xslt->transformToXml($transformed_doc);
     }
     return $this->mods;
   }
