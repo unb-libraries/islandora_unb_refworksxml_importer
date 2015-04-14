@@ -117,7 +117,30 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $xsl_doc->load($xsl_path);
       $xslt->importStylesheet($xsl_doc);
       $transformed_doc = $xslt->transformToDoc($refworks);
-      // Inject UNB MODS elements here!
+
+      // Inject UNB MODS elements
+      $root = $transformed_doc->documentElement;
+
+      // Create new unbfacetInfo element
+      $unb_facet_info = $transformed_doc->createElement('mods:unbfacetInfo');
+
+      // This could certainly be a loop.
+      $unb_institution_name = $transformed_doc->createElement("mods:unbInstitutionName", $this->unb_institution_name);
+      $unb_facet_info->appendChild($unb_institution_name);
+      $unb_faculty_name = $transformed_doc->createElement("mods:unbFacultyName", $this->unb_faculty_name);
+      $unb_facet_info->appendChild($unb_faculty_name);
+      $unb_department_name = $transformed_doc->createElement("mods:unbDepartmentName", $this->unb_department_name);
+      $unb_facet_info->appendChild($unb_department_name);
+      $unb_group_name = $transformed_doc->createElement("mods:unbGroupName", $this->unb_group_name);
+      $unb_facet_info->appendChild($unb_group_name);
+      $unb_scholarship_level = $transformed_doc->createElement("mods:unbScholarshipLevel", $this->unb_scholarship_level);
+      $unb_facet_info->appendChild($unb_scholarship_level);
+      $unb_object_type = $transformed_doc->createElement("mods:unbObjectType", $this->unb_object_type);
+      $unb_facet_info->appendChild($unb_object_type);
+
+      // Append new link to root element
+      $root->appendChild($unb_facet_info);
+
       $this->mods = $xslt->transformToXml($transformed_doc);
     }
     return $this->mods;
