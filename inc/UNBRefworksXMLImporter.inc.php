@@ -66,6 +66,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
               ':input[name="unb_single_person_selector"]' => array('checked' => TRUE),
             ),
           ),
+          '#description' => 'It is important that you only complete this by allowing the autocomplete system to find the person, and you click on the item.',
         ),
 
         'submit' => array(
