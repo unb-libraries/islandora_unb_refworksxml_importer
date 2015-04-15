@@ -26,12 +26,12 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
   protected function __construct($source) {
     parent::__construct($source);
     $this->document = $this->source['document'];
-    $this->unb_institution_name = $this->source[0];
-    $this->unb_faculty_name = $this->source[1];
-    $this->unb_department_name = $this->source[2];
-    $this->unb_group_name = $this->source[3];
-    $this->unb_scholarship_level = $this->source[4];
-    $this->unb_object_type = $this->source[5];
+    $this->unb_institution_name = $this->source['unb_institution_name'];
+    $this->unb_faculty_name = $this->source['unb_faculty_name'];
+    $this->unb_department_name = $this->source['unb_department_name'];
+    $this->unb_group_name = $this->source['unb_group_name'];
+    $this->unb_scholarship_level = $this->source['unb_scholarship_level'];
+    $this->unb_object_type = $this->source['unb_object_type'];
   }
 
   /**
@@ -49,15 +49,13 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       // Get Record.
       $child = $results->item(0);
       $record['document'] = '<refworks>' . $refworks->saveXML($child) . '</refworks>';
-      array_push(
-        $record,
-        $info['unb_institution_name'],
-        $info['unb_faculty_name'],
-        $info['unb_faculty_name'],
-        $info['unb_group_name'],
-        $info['unb_scholarship_level'],
-        $info['unb_object_type']
-      );
+      $record['unb_institution_name'] = $info['unb_institution_name'];
+      $record['unb_faculty_name'] = $info['unb_faculty_name'];
+      $record['unb_department_name'] = $info['unb_department_name'];
+      $record['unb_group_name'] = $info['unb_group_name'];
+      $record['unb_scholarship_level'] = $info['unb_scholarship_level'];
+      $record['unb_object_type'] = $info['unb_object_type'];
+
       // Remove Record.
       $child->parentNode->removeChild($child);
       $refworks->save($info['file']->uri);
