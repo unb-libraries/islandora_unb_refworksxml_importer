@@ -63,7 +63,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
           '#default_value' => '',
           '#states' => array(
             'visible' => array(
-              ':input[name="unb_single_person_selector"]' => array('value' => 1),
+              ':input[name="unb_single_person_selector"]' => array('checked' => TRUE),
             ),
           ),
         ),
