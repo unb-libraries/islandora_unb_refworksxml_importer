@@ -85,26 +85,4 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
     );
     return $info;
   }
-
-  /**
-   * Inherited.
-   */
-  public function preprocess() {
-    $preprocessed = array();
-    $item_class = $this->itemClass;
-
-    $total = $this->getNumber();
-    for ($i = 0; $i < $total; $i++) {
-      $item = $item_class::getOne($this->file);
-      if ($item) {
-        $this->parameters['namespace'] = $this->getNamespace($item);
-        $wrapper = $item->getWrapperClass();
-        $preprocessed[] = $object = new $wrapper($this->connection, $item, $this->parameters);
-        $object->addRelationships();
-        $this->addToDatabase($object, $object->getResources());
-      }
-    }
-
-    return $preprocessed;
-  }
 }
