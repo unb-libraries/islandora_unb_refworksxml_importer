@@ -5,10 +5,7 @@
  */
 
 /**
- * RIS import object.
- *
- * Actually does the heavy-lifting during the import.
- * @author adam
+ * UNBRefworksXMLImportObject import object.
  */
 class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
   protected $mods;
