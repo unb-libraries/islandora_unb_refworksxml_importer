@@ -16,7 +16,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
     $refworks = new DOMDocument();
     $refworks->load(
       drupal_realpath(
-        $this->file->uri
+        $this->file['file']->uri
       )
     );
     $xpath = new DOMXPath($refworks);
