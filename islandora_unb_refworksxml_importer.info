@@ -1,7 +1,7 @@
 name = UNB Refworks XML Importer
 description = UNB-Specific Refworks XML Importer plugin to create citation objects.
 package = Islandora
-dependencies[] = islandora_refworks_xml_importer
+dependencies[] = islandora_refworksxml_importer
 
 files[] = inc/UNBRefworksXMLImporter.inc.php
 files[] = inc/UNBRefworksXMLImportObject.inc.php
