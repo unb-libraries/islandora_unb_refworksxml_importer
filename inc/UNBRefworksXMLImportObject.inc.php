@@ -73,7 +73,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
    */
   public function getMODS() {
     if ($this->mods === NULL) {
-      $path = drupal_get_path('module', 'islandora_unb_refworksxml_importer');
+      $path = drupal_realpath(drupal_get_path('module', 'islandora_unb_refworksxml_importer'));
       $refworks = new DOMDocument();
       $refworks->loadXML($this->document);
       $genre = $refworks->getElementsByTagName('rt');
