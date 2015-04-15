@@ -139,6 +139,10 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       // Append new link to root element
       $mods_root->appendChild($unb_facet_info);
 
+      $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
+      $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:mods', 'http://www.loc.gov/mods/v3');
+      $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+
       $this->mods = $transformed_doc->saveXML();
     }
     return $this->mods;
