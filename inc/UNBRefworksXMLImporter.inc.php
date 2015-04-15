@@ -30,7 +30,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
    * @see IslandoraBatchImporter::getForm()
    */
   public static function getForm(array &$form_state) {
-    module_load_include('php', 'islandora_unb_refworks_importer', 'inc/unb_facet_form_elements.inc');
+    module_load_include('php', 'islandora_unb_refworksxml_importer', 'inc/unb_facet_form_elements.inc');
 
     return array(
       'fs' => array(
