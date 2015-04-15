@@ -8,9 +8,9 @@ CONTENTS OF THIS FILE
 SUMMARY
 -------
 
-UNB Specific Refworks xml Importer
+UNB Specific Refworks XML Importer
 
-Importer plugin for Refworks xml files, to create citation objects.
+Importer plugin for Refworks xml files, to create citation objects. Code modified from original by Paul Pound.
 
 REQUIREMENTS
 ------------
