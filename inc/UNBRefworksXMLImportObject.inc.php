@@ -139,9 +139,20 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       // Append new link to root element
       $mods_root->appendChild($unb_facet_info);
 
+      // Assign correct namespaces.
       $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
       $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:mods', 'http://www.loc.gov/mods/v3');
       $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xlink', 'http://www.w3.org/1999/xlink');
+
+      // If qualified name data was passed, use it
+      if (trim($this->unb_qualified_name) != '') {
+        $xpath = new DomXpath($transformed_doc);
+        $name_personal_element = $xpath->query('//name[@type="personal"][1]')->item(0);
+        if ($name_personal_element instanceof DomElement) {
+          $unb_qualified_name = $transformed_doc->createElement('displayForm', $this->unb_qualified_name);
+          $name_personal_element->appendChild($unb_qualified_name);
+        }
+      }
 
       $this->mods = $transformed_doc->saveXML();
     }
