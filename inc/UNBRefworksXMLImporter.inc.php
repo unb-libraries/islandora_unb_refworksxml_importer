@@ -5,7 +5,7 @@
  */
 
 class UNBRefworksXMLImporter extends RefworksXMLImporter {
-  protected $itemClass = 'RefworksXMLImportObject';
+  protected $itemClass = 'UNBRefworksXMLImportObject';
 
   /**
    * Get the number of items to import from $this->file.
