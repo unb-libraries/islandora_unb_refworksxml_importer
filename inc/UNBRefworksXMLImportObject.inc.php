@@ -144,13 +144,13 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:mods', 'http://www.loc.gov/mods/v3');
       $mods_root->setAttributeNS('http://www.w3.org/2000/xmlns/' ,'xmlns:xlink', 'http://www.w3.org/1999/xlink');
 
-      // If qualified name data was passed, use it
+      // If qualified name data was passed, use it. This should be XPath.
       if (trim($this->unb_qualified_name) != '') {
-        $xpath = new DomXpath($transformed_doc);
-        $name_personal_element = $xpath->query('//name[@type="personal"][1]')->item(0);
-        if ($name_personal_element instanceof DomElement) {
-          $unb_qualified_name = $transformed_doc->createElement('displayForm', $this->unb_qualified_name);
-          $name_personal_element->appendChild($unb_qualified_name);
+        foreach ($transformed_doc->getElementsByTagName('name') as $element) {
+          if ($element->getAttribute('type') == "personal") {
+            $unb_qualified_name = $transformed_doc->createElement('displayForm', $this->unb_qualified_name);
+            $element->appendChild($unb_qualified_name);
+          }
         }
       }
 
