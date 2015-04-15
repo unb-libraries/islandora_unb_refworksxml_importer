@@ -90,7 +90,7 @@ function _get_unb_object_type_form_element() {
   );
   return array(
     '#type' => 'select',
-    '#title' => t('Level of Scholarship'),
+    '#title' => t('Object Type'),
     '#options' => drupal_map_assoc($options),
     '#default_value' => 'Article',
   );
