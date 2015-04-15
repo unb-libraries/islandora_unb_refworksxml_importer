@@ -119,7 +119,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $transformed_doc = $xslt->transformToDoc($refworks);
 
       // Inject UNB MODS elements
-      $root = $transformed_doc->documentElement;
+      $mods_root = $transformed_doc->getElementsByTagName('mods')->item(0);
 
       // Create new unbfacetInfo element
       $unb_facet_info = $transformed_doc->createElement('mods:unbfacetInfo');
@@ -139,9 +139,9 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $unb_facet_info->appendChild($unb_object_type);
 
       // Append new link to root element
-      $root->appendChild($unb_facet_info);
+      $mods_root->appendChild($unb_facet_info);
 
-      $this->mods = $xslt->transformToXml($transformed_doc);
+      $this->mods = $transformed_doc->saveXML();
     }
     return $this->mods;
   }
