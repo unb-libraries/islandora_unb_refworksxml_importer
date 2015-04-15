@@ -43,12 +43,31 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
             'file_validate_extensions' => array('xml'),
           ),
         ),
+
         'unb_institution_name' => _get_unb_institution_name_form_element(),
         'unb_faculty_name' => _get_unb_faculty_name_form_element(),
         'unb_department_name' => _get_unb_department_name_form_element(),
         'unb_group_name' => _get_unb_group_name_form_element(),
         'unb_scholarship_level' => _get_unb_scholarship_level_form_element(),
         'unb_object_type' => _get_unb_object_type_form_element(),
+
+        'unb_single_person_selector' => array(
+          '#type' => 'checkbox',
+          '#title' => t('This import contains items from a single person.'),
+        ),
+
+        'unb_qualified_name' => array(
+          '#title' => t('Faculty Member:'),
+          '#type' => 'textfield',
+          '#autocomplete_path' => 'islandora/entities/autocomplete/disambiguated',
+          '#default_value' => '',
+          '#states' => array(
+            'visible' => array(
+              ':input[name="unb_single_person_selector"]' => array('value' => 1),
+            ),
+          ),
+        ),
+
         'submit' => array(
           '#type' => 'submit',
           '#value' => t('Import'),
@@ -82,6 +101,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
       'unb_group_name' => $form_state['values']['unb_group_name'],
       'unb_scholarship_level' => $form_state['values']['unb_scholarship_level'],
       'unb_object_type' => $form_state['values']['unb_object_type'],
+      'unb_qualified_name' => $form_state['values']['unb_qualified_name'],
     );
     return $info;
   }

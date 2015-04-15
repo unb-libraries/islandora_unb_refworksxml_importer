@@ -15,6 +15,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
   private $unb_group_name;
   private $unb_scholarship_level;
   private $unb_object_type;
+  private $unb_qualified_name;
   private $document;
 
   /**
@@ -29,6 +30,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
     $this->unb_group_name = $this->source['unb_group_name'];
     $this->unb_scholarship_level = $this->source['unb_scholarship_level'];
     $this->unb_object_type = $this->source['unb_object_type'];
+    $this->unb_qualified_name = $this->source['unb_qualified_name'];
   }
 
   /**
@@ -52,6 +54,7 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
       $record['unb_group_name'] = $info['unb_group_name'];
       $record['unb_scholarship_level'] = $info['unb_scholarship_level'];
       $record['unb_object_type'] = $info['unb_object_type'];
+      $record['unb_qualified_name'] = $info['unb_qualified_name'];
 
       // Remove Record.
       $child->parentNode->removeChild($child);
