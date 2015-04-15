@@ -26,12 +26,12 @@ class UNBRefworksXMLImportObject extends RefworksXMLImportObject {
   protected function __construct($source) {
     parent::__construct($source);
     $this->document = $this->source['document'];
-    $this->unb_institution_name = $this->source['unb_institution_name'];
-    $this->unb_faculty_name = $this->source['unb_faculty_name'];
-    $this->unb_department_name = $this->source['unb_department_name'];
-    $this->unb_group_name = $this->source['unb_group_name'];
-    $this->unb_scholarship_level = $this->source['unb_scholarship_level'];
-    $this->unb_object_type = $this->source['unb_object_type'];
+    $this->unb_institution_name = $this->source[0];
+    $this->unb_faculty_name = $this->source[1];
+    $this->unb_department_name = $this->source[2];
+    $this->unb_group_name = $this->source[3];
+    $this->unb_scholarship_level = $this->source[4];
+    $this->unb_object_type = $this->source[5];
   }
 
   /**
