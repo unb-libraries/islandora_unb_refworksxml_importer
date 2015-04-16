@@ -87,7 +87,7 @@ class UNBRefworksXMLImporter extends RefworksXMLImporter {
   }
 
   /**
-   * Get the required info to pass into the file parameter of the constructor.
+   * Build the info that is eventually passed to IslandoraImportObject::getOne().
    *
    * @see IslandoraBatchImporter::getBatchInfo()
    */
